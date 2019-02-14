@@ -11,5 +11,6 @@
     ".classpath": true,
     ".project": true
   },
-  "C_Cpp.intelliSenseEngineFallback": "Enabled"
+  "C_Cpp.intelliSenseEngineFallback": "Enabled",
+  "C_Cpp.default.configurationProvider": "vscode-wpilib"
 }

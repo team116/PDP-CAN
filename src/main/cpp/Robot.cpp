@@ -32,6 +32,16 @@ class Robot : public frc::TimedRobot {
 //    frc::SmartDashboard::PutData(&m_chooser);
     frc::SmartDashboard::PutData("Play", &m_chooser);
 
+    m_destination.AddOption("Do Not Move", Dest::DONOTHING);
+    m_destination.AddOption("Front Cargo", Dest::FRONTCARGO);
+    m_destination.AddOption("Right Cargo", Dest::RIGHTCARGO);
+    m_destination.AddOption("Left Cargo", Dest::LEFTCARGO);
+    m_destination.AddOption("Right Rocket", Dest::RIGHTROCKET);
+    m_destination.AddOption("Left Rocket", Dest::LEFTROCKET);
+    m_destination.SetDefaultOption("Do Not Move", Dest::DONOTHING);
+
+    frc::SmartDashboard::PutData("Destination", &m_destination);
+
   }
 
   void AutonomousInit() override {
@@ -51,6 +61,30 @@ class Robot : public frc::TimedRobot {
          break;
     }
 
+    Dest destination = m_destination.GetSelected();
+    switch (destination) {
+      case DONOTHING:
+         printf("Do Not Move Selected\n");
+         break;
+      case FRONTCARGO:
+         printf("Front Cargo Selected\n");
+          break;
+      case RIGHTCARGO:
+          printf("Right Cargo Selected\n");
+          break;
+      case LEFTCARGO:
+          printf("Left Cargo Selected\n");
+          break;
+      case RIGHTROCKET:
+          printf("Right Rocket Selected\n");
+          break;
+      case LEFTROCKET:
+          printf("Left Rocket Selected\n");
+          break;
+      default:
+         printf("Default Selected\n");
+         break;
+    }
   }
 
   void TeleopPeriodic() override {
@@ -74,6 +108,9 @@ class Robot : public frc::TimedRobot {
   frc::PowerDistributionPanel m_pdp;
   enum Pos {LEFT, CENTER, RIGHT};
   frc::SendableChooser<Pos> m_chooser;
+
+  enum Dest {DONOTHING, FRONTCARGO, RIGHTCARGO, LEFTCARGO, RIGHTROCKET, LEFTROCKET};
+  frc::SendableChooser<Dest> m_destination;
 
 };
 
